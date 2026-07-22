@@ -1,0 +1,12 @@
+.git
+.venv
+backend/.venv
+backend/dist
+frontend/node_modules
+frontend/dist
+.docker-test
+.env
+__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache

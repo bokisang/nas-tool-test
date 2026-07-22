@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    defaults: {run: {working-directory: backend}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with: {version: "0.6.14"}
+      - run: uv sync --all-groups --frozen
+      - run: uv run ruff check .
+      - run: uv run mypy src
+      - run: uv run pytest
+  frontend:
+    runs-on: ubuntu-24.04
+    defaults: {run: {working-directory: frontend}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: "22.15.1", cache: npm, cache-dependency-path: frontend/package-lock.json}
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+  package:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -c "import json; json.load(open('config.ini')); json.load(open('app.lang'))"
+      - run: AI_NAS_SOURCE_PATH=/tmp/source AI_NAS_DATA_PATH=/tmp/data docker compose config
+      - run: docker build --tag ainas-search:ci .

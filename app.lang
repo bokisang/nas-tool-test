@@ -1,0 +1,16 @@
+{
+  "zh-cn": {"name": "AI NAS Search", "description": "本地优先的 NAS 文件搜索"},
+  "zh-hk": {"name": "AI NAS Search", "description": "本機優先的 NAS 檔案搜尋"},
+  "en-us": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "fr-fr": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "de-de": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "it-it": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "es-es": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "hu-hu": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "ja-jp": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "ko-kr": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "pl-pl": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "ru-ru": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "tr-tr": {"name": "AI NAS Search", "description": "Local-first NAS file search"},
+  "pt-pt": {"name": "AI NAS Search", "description": "Local-first NAS file search"}
+}

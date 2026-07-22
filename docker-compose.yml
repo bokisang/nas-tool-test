@@ -1,0 +1,56 @@
+services:
+  ainas-search:
+    build:
+      context: .
+    image: ainas-search:0.1.0
+    container_name: ainas-search
+    restart: unless-stopped
+    user: "${AI_NAS_PUID:-1000}:${AI_NAS_PGID:-1000}"
+    ports:
+      - "${AI_NAS_HTTP_PORT:-18680}:8080"
+    environment:
+      TZ: "${TZ:-Asia/Shanghai}"
+      AI_NAS_DATA_DIR: /app/data
+      AI_NAS_SOURCE_DIR: /source
+      AI_NAS_WORKERS: "1"
+    volumes:
+      - "${AI_NAS_SOURCE_PATH:?Set AI_NAS_SOURCE_PATH in .env}:/source:ro"
+      - "${AI_NAS_DATA_PATH:?Set AI_NAS_DATA_PATH in .env}:/app/data:rw"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=256m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-m", "ainas.healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          cpus: "${AI_NAS_CPU_LIMIT:-2.0}"
+          memory: "${AI_NAS_MEMORY_LIMIT:-2G}"
+  ainas-worker:
+    image: ainas-search:0.1.0
+    container_name: ainas-worker
+    restart: unless-stopped
+    user: "${AI_NAS_PUID:-1000}:${AI_NAS_PGID:-1000}"
+    command: ["python", "-m", "ainas.worker"]
+    environment:
+      TZ: "${TZ:-Asia/Shanghai}"
+      AI_NAS_DATA_DIR: /app/data
+      AI_NAS_SOURCE_DIR: /source
+    volumes:
+      - "${AI_NAS_SOURCE_PATH:?Set AI_NAS_SOURCE_PATH in .env}:/source:ro"
+      - "${AI_NAS_DATA_PATH:?Set AI_NAS_DATA_PATH in .env}:/app/data:rw"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=256m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
