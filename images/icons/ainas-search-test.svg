@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AI NAS Search">
-  <rect width="64" height="64" rx="14" fill="#0f1b31"/>
-  <path d="M14 20.5A6.5 6.5 0 0 1 20.5 14h23A6.5 6.5 0 0 1 50 20.5v15A6.5 6.5 0 0 1 43.5 42h-23A6.5 6.5 0 0 1 14 35.5z" fill="#60a5fa"/>
-  <circle cx="29" cy="28" r="8" fill="none" stroke="#0f1b31" stroke-width="4"/>
-  <path d="m35 34 8 8" fill="none" stroke="#0f1b31" stroke-linecap="round" stroke-width="4"/>
-</svg>
